@@ -1,0 +1,172 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+\usepackage{amsmath,amssymb,CJK}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{listings}
+\usepackage{enumerate}
+ 
+\openup 7pt\pagestyle{plain} \topmargin -40pt \textwidth
+14.5cm\textheight 21.5cm
+\parskip .09 truein
+\baselineskip 4pt\lineskip 4pt \setcounter{page}{1}
+\def\a{\alpha}\def\b{\beta}\def\d{\delta}\def\D{\Delta}\def\fs{\footnotesize}
+\def\g{\gamma}
+\def\G{\Gamma}\def\l{\lambda}\def\L{\Lambda}\def\o{\omiga}\def\p{\psi}
+\def\se{\subseteq}\def\seq{\subseteq}\def\Si{\Sigma}\def\si{\sigma}\def\vp{\varphi}\def\es{\varepsilon}
+\def\sc{\scriptstyle}\def\ssc{\scriptscriptstyle}\def\dis{\displaystyle}
+\def\cl{\centerline}\def\ll{\leftline}\def\rl{\rightline}\def\nl{\newline}
+\def\ol{\overline}\def\ul{\underline}\def\wt{\widetilde}\def\wh{\widehat}
+\def\rar{\rightarrow}\def\Rar{\Rightarrow}\def\lar{\leftarrow}
+\def\Lar{\Leftarrow}\def\Rla{\rightleftarrow}\def\bs{\backslash}
+\def\ra{\rangle}\def\la{\langle}\def\hs{\hspace*}\def\rb{\raisebox}
+\def\ni{\noindent}\def\hi{\hangindent}\def\ha{\hangafter}
+\def\vs{\vspace*}
+\def\hom#1{\mbox{\rm Hom($#1,#1$)}}
+\def\thebeg{\vskip8pt\par\ni}
+\def\theend{\vskip5pt\par}
+\def\chabeg{\pagebreak\par}
+\def\chaend{\vskip20pt\par}
+\def\secbeg{\vskip15pt\par}
+\def\secend{\vskip10pt\par}
+\def\exebeg{\vskip10pt}
+\def\exeend{\vskip6pt}
+\def\undot#1{\mbox{$\mbox{#1}\hs{-1.5ex}_{_{\dis\centerdot}}\,\,$}}
+\def\qed{\hfill\mbox{$\Box$}}
+\def\C{\mathbb{C}}
+\def\Q{\mathbb{Q}}
+\def\ii{\mbox{\,{\bf i}\,}}
+\def\jj{\mbox{\,{\bf j}\,}}
+\def\AA{{\cal A}}
+\def\BB{{\cal B}}
+\def\DD{{\cal D}}
+\def\EE{{\mbox{\bf 1}}}
+\def\OO{{\mbox{\bf 0}}}
+\def\kk{{\mbox{\bf k}}}
+\def\R{\mathbb{R}}
+\def\F{\mathbb{F}{\ssc\,}}
+%\def\similar{\rb{-4pt}{\mbox{\,\~\,}}}
+\def\similar{\backsim}
+\def\Llra{\Longleftrightarrow}
+\def\Lra{\Longrightarrow}
+\def\Lla{\Longleftarrow}
+\def\mat#1#2{\mbox{$\left(\begin{array}{#1}#2\end{array}\right)$}}
+\def\det#1#2{\mbox{$\left|\begin{array}{#1}#2\end{array}\right|$}}
+\def\eset{\emptyset}
+\parindent=5ex
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+\newtheorem{Example}{\text{例}}
+%\begin{CJK*}{UTF8}{gbsn}
+ 
+\date{}
+\title{Homework1}
+\author{Qinglin Li, 5110309074}
+\begin{document}
+\maketitle
+\section*{Problem 1}
+Every process is either red or white. Initially, all processes are white.\\
+All processes send message with same color to its own\\
+The protocol:
+\begin{enumerate}[1.]
+\item
+Process $p_0$ turns red and send message to others
+\item
+$\forall p$, when $p$ receives a message in red color for the first time, it record and send its local state to $p_0$. At the same time, $p$ turns red and send message to others.
+\item 
+The collection $C$ $p_0$ received is a consistant global state
+\end{enumerate}
+\textbf{Proof:}\\
+$\forall e_j, e_j \in C$, $e_j$ must happen before $p_j$ turned red.\\
+$\forall e_i\rightarrow e_j,$ if $p_i$ is red, the message $p_i$ sent to $p_j$ must be red and $e_j$ cannot happen before $p_j$ turned red. So $p_i$ must be white when $e_i$ happened and $e_i\in C$.\\
+So it's a consistant global state.
+\section*{Problem 2}
+\begin{enumerate}
+\item a combination of safety and liveness
+\item a safety property
+\item a combination of safety and liveness
+\item no property at all
+\item a safety property
+\item a liveness property
+\end{enumerate}
+
+\section*{Problem 3}
+\begin{enumerate}
+\item
+	\begin{enumerate}
+	\item
+	For every general $x$, ($x\in\{A,B\}$):\\
+	If $inp_x=$``ready" let $m_{send}=$``yes", else let $m_{send}=$``no"\\
+	Send $m_{send}$ for $11$ times\\
+	
+	Let $m_{deliver}$ be the delivered message\\
+	Decide ``attack" if $m_{deliver}=$``yes" and $m_{send}=$``yes". Otherwise, decide ``no"\\
+	
+	\textbf{Agreement:}\\
+	Since at most $10$ messages are lost, both generals should deliver at least one message for the other. If a general decide ``attack", he must send and deliver the message ``yes" and the other general must decide ``attack" because he send and deliver ``yes" too. In any other case, every general would send ``no" or deliver ``no" and then both decide ``no".\\
+	
+	\textbf{Validity:}\\
+	If both inputs are ``not ready", both generals must send and deliver ``no", so they both decide ``not attack".\\
+	If both inputs are ``ready", both generals must send and deliver ``yes", so they both decide ``attack".\\
+	
+	\textbf{Termination:}\\
+	Because both generals send only $11$ messages and eventually deliver a message, so they eventually decide.
+	\item
+	If $inp=$``ready" let $m_{send}=$``yes", else let $m_{send}=$``no"\\
+	
+	For general $A$:\\
+	Keep sending $m_{send_A}$ until receiving a message from general B\\
+	
+	For general $B$:\\
+	Send $m_{send_B}$ whenever receiveing a message from general A\\
+	
+	Let $m_{deliver}$ be the delivered message\\
+	Decide ``attack" if $m_{deliver}=m_{send}=$``yes". Decide ``no" if $inp$=``not ready"\\
+	
+	\textbf{Agreement:}\\
+	Since finite messages are lost, both generals should eventually deliver at least one message for the other. If a general decide ``attack", he must send and deliver the message ``yes" and the other general must decide ``attack" because he send and deliver ``yes" too. In any other case, every general would send ``no" or deliver ``no" and then both decide ``no".\\
+	
+	\textbf{Validity:}\\
+	If both inputs are ``not ready", both generals must decide ``not attack".\\
+	If both inputs are ``ready", both generals must send ``yes" and eventually deliver ``yes", so they both decide ``attack".\\
+	
+	\textbf{Termination:}\\
+	Because eventually one message should be delivered, they eventually decide.
+	\end{enumerate}
+\item
+	\begin{enumerate}
+	\item Because both generals send $11$ messages, they halt.
+	\item Since finite messages are lost, general $B$ should have received some messages from general $A$ and general $A$ should eventually have received a message from general $B$. So general $A$ halts.\\
+	Because general $B$ receives no more messages than general $A$ have sent, general $B$ halts.
+	\end{enumerate}
+\end{enumerate}
+
+\section*{Problem 4}
+\textbf{Property X:}
+For any distinct process $i$ and $j$, if $i$ sent $m$ before $j$ sent $m'$, no process would deliver $m$ after $m'$.\\
+
+FIFO ensures
+$$send_i(m)\rightarrow send_i(m') \Rightarrow send_k(m)\rightarrow send_k(m')$$
+Property X ensures
+$$\forall i\neq j, send_i(m)\rightarrow send_j(m') \Rightarrow send_k(m)\rightarrow send_k(m')$$
+So FIFO + Property X ensures
+$$\forall i,j, send_i(m)\rightarrow send_j(m') \Rightarrow send_k(m)\rightarrow send_k(m')$$
+And that's casual property
+%\end{CJK*} 
+
+\section*{Problem 5}
+Every processor $p$ maintains a vector clock.\\
+Let $m_i$ be the last message $p_i$ delivered and $D[i]=TS(m_i)[i]$\\
+When a message $m$ is delivered by $p_i$, $VC(e_i)=max(VC[i],TS(m))$\\
+When $p_i$ is broadcasting a message, $VC(E_i)[i]=VC[i]+1$\\
+In other situations, $p_i$ just keep $VC$\\
+Deliver $m$ from $p_j$ as soon as both of the following conditions are satisfied:
+\begin{enumerate}
+\item
+$D[j]=TS(m)[j]-1$
+\item
+$D[k]\geq TS(m)[k], \forall k\neq j$
+\end{enumerate}
+
+\end{document}
