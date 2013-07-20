@@ -1,0 +1,181 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt]{article}
+\usepackage{amssymb,amsthm}
+\usepackage{amsmath,amssymb,CJK}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{listings}
+\usepackage{enumerate}
+ 
+\openup 7pt\pagestyle{plain} \topmargin -40pt \textwidth
+14.5cm\textheight 21.5cm
+\parskip .09 truein
+\baselineskip 4pt\lineskip 4pt \setcounter{page}{1}
+\def\a{\alpha}\def\b{\beta}\def\d{\delta}\def\D{\Delta}\def\fs{\footnotesize}
+\def\g{\gamma}
+\def\G{\Gamma}\def\l{\lambda}\def\L{\Lambda}\def\o{\omiga}\def\p{\psi}
+\def\se{\subseteq}\def\seq{\subseteq}\def\Si{\Sigma}\def\si{\sigma}\def\vp{\varphi}\def\es{\varepsilon}
+\def\sc{\scriptstyle}\def\ssc{\scriptscriptstyle}\def\dis{\displaystyle}
+\def\cl{\centerline}\def\ll{\leftline}\def\rl{\rightline}\def\nl{\newline}
+\def\ol{\overline}\def\ul{\underline}\def\wt{\widetilde}\def\wh{\widehat}
+\def\rar{\rightarrow}\def\Rar{\Rightarrow}\def\lar{\leftarrow}
+\def\Lar{\Leftarrow}\def\Rla{\rightleftarrow}\def\bs{\backslash}
+\def\ra{\rangle}\def\la{\langle}\def\hs{\hspace*}\def\rb{\raisebox}
+\def\ni{\noindent}\def\hi{\hangindent}\def\ha{\hangafter}
+\def\vs{\vspace*}
+\def\hom#1{\mbox{\rm Hom($#1,#1$)}}
+\def\thebeg{\vskip8pt\par\ni}
+\def\theend{\vskip5pt\par}
+\def\chabeg{\pagebreak\par}
+\def\chaend{\vskip20pt\par}
+\def\secbeg{\vskip15pt\par}
+\def\secend{\vskip10pt\par}
+\def\exebeg{\vskip10pt}
+\def\exeend{\vskip6pt}
+\def\undot#1{\mbox{$\mbox{#1}\hs{-1.5ex}_{_{\dis\centerdot}}\,\,$}}
+\def\qed{\hfill\mbox{$\Box$}}
+\def\C{\mathbb{C}}
+\def\Q{\mathbb{Q}}
+\def\ii{\mbox{\,{\bf i}\,}}
+\def\jj{\mbox{\,{\bf j}\,}}
+\def\AA{{\cal A}}
+\def\BB{{\cal B}}
+\def\DD{{\cal D}}
+\def\EE{{\mbox{\bf 1}}}
+\def\OO{{\mbox{\bf 0}}}
+\def\kk{{\mbox{\bf k}}}
+\def\R{\mathbb{R}}
+\def\F{\mathbb{F}{\ssc\,}}
+%\def\similar{\rb{-4pt}{\mbox{\,\~\,}}}
+\def\similar{\backsim}
+\def\Llra{\Longleftrightarrow}
+\def\Lra{\Longrightarrow}
+\def\Lla{\Longleftarrow}
+\def\mat#1#2{\mbox{$\left(\begin{array}{#1}#2\end{array}\right)$}}
+\def\det#1#2{\mbox{$\left|\begin{array}{#1}#2\end{array}\right|$}}
+\def\eset{\emptyset}
+\parindent=5ex
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+\newtheorem{Example}{\text{例}}
+
+%\begin{CJK*}{UTF8}{gbsn}
+ 
+\date{}
+\title{Homework2}
+\author{Qinglin Li, 5110309074}
+\begin{document}
+\maketitle
+
+\section*{Problem 1}
+\subsection*{Protocol:}
+\subsubsection*{Round $1$}
+The sender sends message $m$ to everybody
+\subsubsection*{Round $2$---Round $f+2$}
+The sender and all processes that have received the message $m$ propose for $m$, others propose for \texttt{SF}\\
+Run the consensus protocol with the decision function
+$
+	f(V)=\left\{
+	\begin{aligned}
+		&m  &(m\in V)\\
+		&SF &(m\ V)
+	\end{aligned}
+	\right.
+$
+\subsection*{Proof:}
+\subsubsection*{Termination}
+Since the consensus protocol terminates, this protocol also terminates.
+\subsubsection*{Agreement}
+If a correct process have delivered $m$, it must have decided $m$ in the consensus protocol.\\
+According to the agreement of the consensus protocol, all correct processes must have decided $m$. So all correct processes have delivered $m$.
+\subsubsection*{Validity}
+According to the validity of the consensus protocol, if the sender is correct, all correct processes should eventually have decided $m$ and delivered $m$;
+\subsubsection*{Integrity}
+According to the consensus protocol, every correct process delivers at most one message.\\
+If a correct process have delivered $m$, it must have decided $m$ in the consensus protocol. According to the integrity of the consensus protocol, there must be some process have proposed $m$ which is sent form the sender.
+
+\section*{Problem 2}
+\subsection*{Protocol:}
+\subsubsection*{Round $1$}
+The sender sends message $m$ to everybody
+\subsubsection*{Round $2$---Round $f+1$}
+The sender sends message $m$ to everybody.\\
+The sender and all processes that have received the message $m$ propose for $m$, others propose for \texttt{SF}\\
+Run the consensus protocol for $f$ round as if there are at most $f-1$ processes crash with the decision function
+$
+	f(V)=\left\{
+	\begin{aligned}
+		&m  &(m\in V)\\
+		&SF &(m\ V)
+	\end{aligned}
+	\right.
+$
+\subsection*{Proof:}
+\subsubsection*{Termination}
+According to the termination of the consensus protocol, this protocol must terminate.
+\subsubsection*{Agreement}
+If the sender hadn't crashed until round $2$, every correct process should have received $m$. So every correct process should decide $m$ and then deliver $m$.\\
+If the sender crashed before the second round, there are at most $f-1$ faults remaining. So the sonsensus protocol can ensure agreement.
+\subsubsection*{Validity}
+If the sender is correct, all correct processes must have received the message $m$ from the sender in the second round. So all of them deliver $m$.
+\subsubsection*{Integrity}
+The decision function $f$ ensures every correct process delivers at most one $1$ message. If it delivers $m\neq SF$, then sender must have broadcast $m$
+
+\section*{Problem 3}
+\begin{enumerate}
+\item
+\textbf{\large Protocol:}\\
+
+Suppose sender sends the message $m$ and $p$ is an arbitrary process.\\
+In round $k(1\leq k\leq t+1)$:
+\begin{enumerate}
+\item If $p$ is the sender or $p$ has received $m$ in the previous rounds, $p$ sends $m$ to all.
+\item $p$ receives messages sent in round $k$.\\
+\end{enumerate}
+In round $t + 2$:
+\begin{enumerate}
+\item If $p$ is sender or $p$ has received $m$ in the previous rounds,$p$ sends $m$ to all. Otherwise, $p$ sends $SF$ to all.
+\item $p$ receives messages sent in round $t+2$.
+\item If $p$ have received some message $m$ for more than $\frac{n}{2}$ times, $p$ delivers $m$.
+\end{enumerate}
+\newpage
+\textbf{\large Proof:}\\
+
+\textbf{Termination}\\
+
+Since the first $t+1$ rounds are same as the TRB protocol except for message dilivering, all correct processes should send the same message in round $t+2$ and then they eventually deliver the message.\\
+
+\textbf{Uniform Agreement}\\
+
+If a process $p$ delivered $m\neq SF$ , it must have received $m$ for more than $\frac{n}{2}$ times in round $t + 2$. So more than $\frac{n}{2}$ processes sent $m$ in round $t+2$ and they must have received $m$ before round $t+2$.\\
+Since the first $t+1$ rounds are same as the TRB protocol except for message dilivering, by the end of round t + 1, all correct processes should have received $m$.\\
+So all correct processes should deliver $m$ in round $t + 2$.\\
+
+If a process $p$ delivered $m=SF$ , it must have received $SF$ for more than $\frac{n}{2}$ times in round $t + 2$. So more than $\frac{n}{2}$ processes sent $SF$ in round $t+2$ and they must haven't received $m$ before round $t+2$.\\
+Since the first $t+1$ rounds are same as the TRB protocol except for message dilivering, by the end of round t + 1, all correct processes should have received $m$ if any correct process have reveived $m$.\\
+So none of the correct process have ever received $m$ and all correct processes should deliver $SF$ in round $t + 2$.\\
+
+\textbf{Validity}\\
+
+If the sender is correct, all correct processes should have received $m$.\\
+So in round $t + 2$ every correct process should have received $m$ for more than $\frac{n}{2}$ times because $n>2t$.\\
+All correct processes delivered $m$\\
+
+\textbf{Integrity}\\
+
+In round t + 2, every correct process should deliver at most one message.\\
+If a correct process delivered m, then the sender must have sent m.\\
+
+\item
+\textbf{\large Proof:}\\
+
+(By contradiction)\\
+Suppose there is an protocol with $n\leq 2t$\\
+The processes can be divided to two groups $X$ and $Y$ whose size are less than or equal to $t$. WLOG, let the sender in $X$.\\
+If all processes in $X$ crashed at the beginning, all the processes in $Y$ should deliver $SF$.\\
+But if all processes in $X$ are correct and all process in $Y$ cannot receive messages. Because these two situations are similar for every process in $Y$, they should deliver $SF$. However, every process in $X$ should deliver $m$.\\
+Contradiction to \textbf{uniform agreement}.\\
+\end{enumerate}
+
+\section*{Problem 4}
+\end{document}
