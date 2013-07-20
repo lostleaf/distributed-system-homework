@@ -178,4 +178,43 @@ Contradiction to \textbf{uniform agreement}.\\
 \end{enumerate}
 
 \section*{Problem 4}
+
+\subsection*{Termination}
+Since the vector $V_p$ have at least one element that is not $\bot$, every process should eventually decide.\\
+
+\subsection*{Agreement}
+According to Lemma $2$, for every correct process $p$, $V_p$ are the same in the end. So the decisions
+must be the same.
+
+\subsection*{Integrity}
+At the end of the protocol, every correct process should decide only one value.\\
+If the value $v$ is decided, there must be some process $p$ having $v$ as element of $V_p$ by definition of the operations.\\
+
+\subsection*{Validity}
+If all process propose for $v$, the only possible value except for $\bot$ in every $V_p$ at the end is $v$.\\
+So every correct process should eventually decide $v$.
+
+\section*{Problem 5}
+Suppose $n=3$ and $f=1$\\
+\begin{tabular}{|c|c|c|c|}
+\hline 
+• & $p_1$ & $p_2$ & $p_3$ \\ 
+\hline 
+input & $0$ & $1$ & $1$ \\ 
+\hline 
+sent a-value & $0$ & $1$ & $1$ \\ 
+\hline 
+received a-values & $(0,1)$ & $(1,1)$ & $(1,1)$ \\ 
+\hline 
+sent b-value & $\bot$ & $1$ & $1$ \\ 
+\hline 
+received b-value & $(1,\bot)$ & $(1,\bot)$ & $(1,1)$ \\ 
+\hline 
+decision & none & none & 1 \\ 
+\hline 
+\end{tabular} 
+
+Suppose then $p_1$ and $p_2$ have $0$ as their a-value and $p_3$ have a really large latency so that $p_1$ and $p_2$ always ignore its messages.\\
+So $p_1$ and $p_2$ would decide $0$\\
+Agreement is broken.\\
 \end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.7.10)  21 JUL 2013 00:52
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.7.10)  21 JUL 2013 01:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -421,11 +421,29 @@ Underfull \hbox (badness 10000) in paragraph at lines 172--178
 
  []
 
-[5] (./homework2.aux) ) 
+
+Underfull \hbox (badness 10000) in paragraph at lines 183--184
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 190--192
+
+ []
+
+Missing character: There is no â in font cmr12!
+Missing character: There is no € in font cmr12!
+Missing character: There is no ¢ in font cmr12!
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 217--220
+
+ []
+
+[6] (./homework2.aux) ) 
 Here is how much of TeX's memory you used:
  4747 strings out of 495049
  61052 string characters out of 3181740
- 123494 words of memory out of 3000000
+ 125494 words of memory out of 3000000
  7872 multiletter control sequences out of 15000+200000
  12572 words of font info for 49 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -439,10 +457,10 @@ re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texl
 ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on homework2.pdf (5 pages, 87901 bytes).
+Output written on homework2.pdf (6 pages, 91671 bytes).
 PDF statistics:
- 56 PDF objects out of 1000 (max. 8388607)
- 39 compressed objects within 1 object stream
+ 59 PDF objects out of 1000 (max. 8388607)
+ 41 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
